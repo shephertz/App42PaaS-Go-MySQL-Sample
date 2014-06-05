@@ -55,6 +55,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request){
 		users = append(users, user)
 	}
 	t := template.New("new.html")
+	fmt.Println(users)
 	t, _ = template.ParseFiles("templates/index.html")
 	t.Execute(w, users)
 }
@@ -85,7 +86,8 @@ func main() {
 	http.HandleFunc("/new/", newHandler)
 	http.HandleFunc("/save/", saveHandler)
 
-	http.Handle("/templates/", http.StripPrefix("/templates/", http.FileServer(http.Dir("templates"))))
+	http.Handle("/public/css/", http.StripPrefix("/public/css/", http.FileServer(http.Dir("public/css"))))
+	http.Handle("/public/images/", http.StripPrefix("/public/images/", http.FileServer(http.Dir("public/images"))))
 	fmt.Println("Listening Server.....")
 	if err := http.ListenAndServe("0.0.0.0:3000", nil); err != nil {
 		log.Fatalf("Template Execution %s", err)
