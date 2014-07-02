@@ -16,7 +16,7 @@ type User struct{
 }
 
 func setupDB() *sql.DB{
-	db, err := sql.Open("mysql", "root@/Go_MySQL_Sample?charset=utf8")
+	db, err := sql.Open("mysql", "USER:PASSWORD@tcp(VM IP:VM PORT)/DATABASE NAME?charset=utf8")
 	PanicIf(err)
 	return db
 }
